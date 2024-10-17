@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Flask AWS Lambda App
+
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: hello_world.app.lambda_handler
+      Runtime: python3.11
+      CodeUri: hello_world/
+      Environment:
+        Variables:
+          TABLE_NAME: FlaskAppTable
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /lambda_user
+            Method: get
+
+Outputs:
+  HelloWorldApi:
+    Description: "API Gateway endpoint URL for the HelloWorldFunction"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/lambda_user"
+    Export:
+      Name: HelloWorldApiUrl

@@ -1,0 +1,21 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: Flask AWS Lambda App
+Resources:
+  HelloWorldFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: hello_world.app.lambda_handler
+      Runtime: python3.11
+      CodeUri: HelloWorldFunction
+      Environment:
+        Variables:
+          TABLE_NAME: FlaskAppTable
+      Events:
+        HelloWorld:
+          Type: Api
+          Properties:
+            Path: /lambda_user
+            Method: get
+    Metadata:
+      SamResourceId: HelloWorldFunction

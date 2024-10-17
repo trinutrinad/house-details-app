@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+nav {
+    background-color: #007BFF;
+    color: white;
+    padding: 10px;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+.container {
+    margin: 20px;
+}
+
+.flashes {
+    color: red;
+}
