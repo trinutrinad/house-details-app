@@ -1,0 +1,66 @@
+import os
+
+# Define the project structure
+project_structure = {
+    "house-details-app": {
+        "backend": {
+            "app": [
+                "__init__.py",
+                "models.py",
+                "routes.py",
+                "utils.py",
+                "config.py",
+                "requirements.txt",
+                "controllers"
+            ],
+            "migrations": [],
+            "tests": [
+                "__init__.py",
+                "test_models.py",
+                "test_routes.py"
+            ],
+            ".env": None,
+            "run.py": None
+        },
+        "frontend": {
+            "public": [],
+            "src": [
+                "components",
+                "pages",
+                "services",
+                "utils",
+                "App.js",
+                "index.js",
+                "styles"
+            ],
+            "package.json": None,
+            ".env": None,
+            "README.md": None
+        },
+        "scripts": [
+            "deploy.sh"
+        ],
+        ".gitignore": None,
+        "README.md": None
+    }
+}
+
+# Function to create directories and files
+def create_structure(base_path, structure):
+    for name, content in structure.items():
+        path = os.path.join(base_path, name)
+        if isinstance(content, dict):  # If the content is a dict, create a directory
+            os.makedirs(path, exist_ok=True)
+            create_structure(path, content)
+        elif isinstance(content, list):  # If the content is a list, create files
+            os.makedirs(path, exist_ok=True)
+            for file_name in content:
+                file_path = os.path.join(path, file_name)
+                open(file_path, 'w').close()  # Create an empty file
+        elif content is None:  # Create an empty file
+            open(path, 'w').close()
+
+# Create the project structure in the current directory
+create_structure(os.getcwd(), project_structure)
+
+print("Project structure created successfully!")
